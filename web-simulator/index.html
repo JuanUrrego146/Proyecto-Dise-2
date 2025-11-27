@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simulador de Hormigas - Web</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Simulador de Hormigas</h1>
+    <p>Versión web sin backend. Diseñado para ejecutarse con Live Server o abriendo este archivo en el navegador.</p>
+  </header>
+
+  <main class="app-grid">
+    <section class="panel controls">
+      <h2>Controles</h2>
+      <div class="control-group">
+        <label for="antCount">Hormigas iniciales</label>
+        <input id="antCount" type="number" min="1" max="200" value="30" />
+      </div>
+      <div class="control-group">
+        <label for="foodCount">Comida inicial</label>
+        <input id="foodCount" type="number" min="0" max="100" value="10" />
+      </div>
+      <div class="control-group">
+        <label for="pheromoneRate">Rastro por exploradora (segundos)</label>
+        <input id="pheromoneRate" type="number" min="0.5" max="10" step="0.5" value="2" />
+      </div>
+      <div class="control-group">
+        <label for="timeScale">Escala de tiempo (min de sim / min real)</label>
+        <div class="scale-badge" id="timeScaleBadge">1 min / min</div>
+        <input id="timeScale" type="range" min="1" max="1440" value="1" step="1" />
+        <div class="scale-row">
+          <span id="timeScaleValue">1 min / min</span>
+          <small>Máximo 1 día por minuto</small>
+        </div>
+      </div>
+      <div class="button-row">
+        <button id="startBtn">Iniciar con valores</button>
+        <button id="pauseBtn" class="ghost">Pausar</button>
+        <button id="resetBtn" class="ghost">Reiniciar</button>
+      </div>
+
+      <div class="button-row secondary">
+        <button id="spawnFoodBtn">Añadir comida</button>
+        <button id="spawnPheromoneBtn">Pulso de hormonas</button>
+      </div>
+
+      <div class="status">
+        <div class="status-dot" id="statusDot"></div>
+        <div>
+          <div id="statusLabel">Iniciando...</div>
+          <small id="statusDetail">Listo para simular</small>
+        </div>
+      </div>
+      <div class="legend">
+        <div><span class="shape ant"></span> Hormiga (triángulo)</div>
+        <div><span class="shape ant food-mode"></span> Hormiga con comida (rojo)</div>
+        <div><span class="shape ant dying"></span> Hormiga débil (blanco)</div>
+        <div><span class="shape food"></span> Comida (rombo)</div>
+        <div><span class="shape colony"></span> Colonia (depósito)</div>
+        <div><span class="shape pheromone"></span> Hormona (círculo)</div>
+      </div>
+    </section>
+
+    <section class="canvas-wrapper">
+      <canvas id="simCanvas" width="900" height="600" aria-label="Mapa del hormiguero"></canvas>
+    </section>
+
+    <section class="panel info">
+      <h2>Información</h2>
+      <div id="infoContent" class="info-content">
+        <p>Haz clic en una hormiga, comida u hormona para ver sus datos.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <small>
+      Port web inspirado en la lógica del proyecto original de Unity. Todo corre en el frontend sin llamadas a servidor.
+    </small>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
